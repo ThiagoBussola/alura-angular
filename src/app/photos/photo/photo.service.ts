@@ -23,5 +23,4 @@ export class PhotoService {
             .get<Photo[]>(API+ '/' + userName + '/photos', { params });
         
     }
-    
 }
