@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserNotTakenValidatorService } from './user-note-taken.validator.service';
+import { NewUser } from './new-user';
+import { SignUpService } from './signup.service';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './signup.component.html'
@@ -11,7 +14,9 @@ export class SignUpComponent {
 
     constructor(
         private formBuilder: FormBuilder,
-        private userNotTakenValidatorService: UserNotTakenValidatorService
+        private userNotTakenValidatorService: UserNotTakenValidatorService,
+        private signupService: SignUpService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -46,8 +51,18 @@ export class SignUpComponent {
                     Validators.maxLength(14)
                 ]
             ]
-        })
-        
+        })        
     }
 
+    signup() {
+        const newUser = this.signupForm.getRawValue() as NewUser;
+
+        this.signupService
+            .signup(newUser)
+            .subscribe(
+                () => this.router.navigate([``]),
+                err => console.log(err)
+            );
+
+    }
 }

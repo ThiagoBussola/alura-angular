@@ -1,11 +1,11 @@
 import { Directive, ElementRef, HostListener, Renderer, Input } from '@angular/core';
 
 @Directive({
-    selector: '[appDarkenOnHover]'
+    selector: '[apDarkenOnHover]'
 })
-export class DarkenOnHoverDirective {
+export class DarkenOnHoverDirective { 
 
-    @Input() brightness = '70%'
+    @Input() brightness = '70%';
 
     constructor(
         private el: ElementRef,
@@ -21,5 +21,4 @@ export class DarkenOnHoverDirective {
     darkenOff() {
         this.render.setElementStyle(this.el.nativeElement, 'filter', 'brightness(100%)');
     }
-
 }
